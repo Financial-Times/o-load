@@ -26,7 +26,7 @@ function oLoad(
 	const opts = Object.assign({}, defaultOpts, createOptsFromDataSet(oLoadEl));
 	const componentRoot = document.createElement("div");
 
-	if (opts.moduleUrl.match(/min\.(.js)?$/)) {
+	if (opts.moduleUrl && opts.moduleUrl.match(/min\.(.js)?$/)) {
 		$script(
 			"https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.19/system-production.js",
 			"system"
@@ -38,20 +38,22 @@ function oLoad(
 		);
 	}
 
-	$script.ready("system", function(System = window.System) {
-		System.config(opts.systemjsOpts);
+	return new Promise((resolve, reject) => {
+		$script.ready("system", function(System = window.System) {
+			System.config(opts.systemjsOpts);
 
-		if (oLoadEl && oLoadEl.parentNode) {
-			return System.import(opts.moduleUrl)
-				.then(m => {
-					oLoadEl.parentNode.replaceChild(componentRoot, oLoadEl);
-					componentRoot.classList.add("o-loaded");
-					return m.default(componentRoot);
-				})
-				.catch(e => {
-					console.error(e);
-				});
-		}
+			if (oLoadEl && oLoadEl.parentNode) {
+				return System.import(opts.moduleUrl)
+					.then(m => {
+						oLoadEl.parentNode.replaceChild(componentRoot, oLoadEl);
+						componentRoot.classList.add("o-loaded");
+						resolve(m.default(componentRoot));
+					})
+					.catch(e => {
+						reject(e);
+					});
+			}
+		});
 	});
 }
 

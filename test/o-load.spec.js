@@ -5,11 +5,13 @@
 import chai from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
+import chaiAsPromised from 'chai-as-promised';
 import component from "../main";
 import * as fixtures from "./helpers/fixtures";
 
 const should = chai.should();
 chai.use(sinonChai);
+chai.use(chaiAsPromised);
 
 describe("oLoad", () => {
 	it("is defined", () => {
@@ -36,7 +38,7 @@ describe("oLoad", () => {
 	});
 
 	// This is broken for some reason
-	xdescribe("should create a new", () => {
+	describe("should create a new", () => {
 		beforeEach(() => {
 			fixtures.htmlCode();
 		});
@@ -48,12 +50,12 @@ describe("oLoad", () => {
 		it("component array when initialized", () => {
 			const componentItems = component.init();
 			componentItems.should.be.an("array");
-			componentItems[0].should.be.an.instanceof(component);
+			componentItems[0].should.eventually.be.an.instanceof(component);
 		});
 
 		it("single component when initialized with a root element", () => {
 			const componentItem = component.init("#element");
-			componentItem.should.be.an.instanceof(component);
+			componentItem.should.eventually.be.an.instanceof(component);
 		});
 	});
 });
