@@ -7,12 +7,8 @@
 	"support": "https://github.com/financial-times/o-load/issues",
 	"supportStatus": "active",
 	"browserFeatures": {
-		"required": [
-			"default-3.6"
-		],
-		"optional": [
-			"default-3.6"
-		]
+		"required": ["default-3.6"],
+		"optional": ["default-3.6"]
 	},
 	"ci": {
 		"circle": "https://circleci.com/api/v1/project/Financial-Times/o-load"

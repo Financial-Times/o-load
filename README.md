@@ -1,21 +1,21 @@
 # o-load
 
-This is an [origami](http://origami.ft.com/) component that bootstraps components.
+This is an [Origami](http://origami.ft.com/) component that bootstraps non-Origami
+components.
 
 ### Getting started
 
-Install via Bower:
+Install via npm:
 
-```
-bower install --S o-load
+```bash
+$ npm install @financial-times/o-load
 ```
 
 Load the JS:
 
 ```js
-import oLoad from 'o-load';
+import oLoad from "o-load";
 ```
-
 
 ### License
 

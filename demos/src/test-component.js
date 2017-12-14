@@ -1,25 +1,39 @@
-// /**
-//  * @file
-//  * This demo component bootstraps the component using SystemJS
-//  * In the future the distinction between dev and prod builds will be handled at runtime.
-//  * I'm just not entirely sure the best way of doing that yet...
-//  */
-//
-// import System 'systemjs';
-//
-// System.config({
-// 	map: {
-// 		react: 'https://cdnjs.cloudflare.com/ajax/libs/preact/8.2.7/preact.min.js',
-// 		'plugin-babel': 'https://unpkg.com/systemjs-plugin-babel@0.0.25'
-// 	},
-// 	packages: {
-//     'plugin-babel': {
-//       main: 'plugin-babel.js',
-//     },
-//   },
-// 	transpiler: 'plugin-babel',
-// });
-//
-// export default System.import('./party-parrot.js');
+/**
+ * @file
+ * This demo component bootstraps the component using SystemJS.
+ * It's kind of sub-optimal because we're using SystemJS from globals, but
+ * this is meant more as a demonstration than anything.
+ */
 
-export default 'hurr';
+// SystemJS is provided via global from $script.
+// This is sub-optimal, but works for demo purposes.
+/* global System */
+
+System.config({
+	map: {
+		"plugin-babel": "https://unpkg.com/systemjs-plugin-babel@0.0.25",
+		"systemjs-babel-build":
+			"https://unpkg.com/systemjs-plugin-babel@0.0.25/systemjs-babel-browser.js",
+		preact: "https://unpkg.com/preact@8.2.7"
+	},
+	packages: {
+		"plugin-babel": {
+			main: "plugin-babel.js"
+		}
+	},
+	transpiler: "plugin-babel",
+	meta: {
+		"*.js": {
+			babelOptions: {
+				react: true
+			}
+		}
+	}
+});
+
+export default el =>
+	System.import(
+		"https://rawgit.com/Financial-Times/o-load/HEAD/demos/src/party-parrot.js"
+	).then(m => {
+		return m.default(el);
+	});
