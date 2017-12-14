@@ -1,0 +1,36 @@
+{
+	"description": "that bootstraps components",
+	"origamiType": "module",
+	"origamiVersion": 1,
+	"keywords": "loader, systemjs",
+	"origamiCategory": "components",
+	"support": "https://github.com/financial-times/o-load/issues",
+	"supportStatus": "active",
+	"browserFeatures": {
+		"required": [
+			"default-3.6"
+		],
+		"optional": [
+			"default-3.6"
+		]
+	},
+	"ci": {
+		"circle": "https://circleci.com/api/v1/project/Financial-Times/o-load"
+	},
+	"demosDefaults": {},
+	"demos": [
+		{
+			"name": "demo",
+			"js": "demos/src/demo.js",
+			"template": "demos/src/demo.mustache",
+			"description": "Basic demo"
+		},
+		{
+			"name": "pa11y",
+			"js": "demos/src/demo.js",
+			"template": "demos/src/pa11y.mustache",
+			"hidden": true,
+			"description": "Accessibility test will be run against this demo"
+		}
+	]
+}

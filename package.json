@@ -1,0 +1,25 @@
+{
+	"private": true,
+	"scripts": {
+		"build": "rollup -c",
+		"minify": "uglifyjs --comments -c -m -o dist/d3-bootloader.min.js dist/d3-bootloader.js",
+		"lint": "eslint src/",
+		"prepare": "npm run build && npm run minify"
+	},
+	"devDependencies": {
+		"chai": "^3.5.0",
+		"eslint-plugin-import": "^2.8.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"mocha": "^3.0.2",
+		"rollup-plugin-commonjs": "^8.2.6",
+		"rollup-plugin-node-resolve": "^3.0.0",
+		"rollup-plugin-resolve": "0.0.1-predev.1",
+		"rollup-watch": "^4.3.1",
+		"sinon": "^1.17.5",
+		"sinon-chai": "^2.8.0",
+		"uglify-js": "^3.2.2"
+	},
+	"dependencies": {
+		"systemjs": "^0.20.19"
+	}
+}
