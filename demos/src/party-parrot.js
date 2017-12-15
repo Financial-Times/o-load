@@ -16,7 +16,7 @@ export default (el, opts = {}) =>
 	preact.render(
 		<img
 			alt="party parrot"
-			transform={opts.flip ? "transform: scaleX(-1);" : ""}
+			style={opts.flip ? "transform: scaleX(-1);" : ""}
 			src={gif}
 		/>,
 		el

@@ -4,7 +4,7 @@
  */
 
 import $script from "scriptjs";
-import {Html5Entities as Entities} from 'html-entities';
+import { Html5Entities as Entities } from "html-entities";
 
 /**
  * Required config for build modules on-the-fly via SystemJS plugin-babel
@@ -41,55 +41,60 @@ const devOpts = {
 function oLoad(
 	oLoadEl,
 	defaultOpts = {
-		systemjsOpts: {},
+		systemjsOpts: {}
 	}
 ) {
 	const opts = Object.assign({}, defaultOpts, createOptsFromDataSet(oLoadEl));
 	const componentRoot = document.createElement("div");
 
-	if (opts.moduleUrl && opts.moduleUrl.match(/min\.(.js)?$/)) {
-		$script(
-			"https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.19/system-production.js",
-			"system"
-		);
+	if (
+		!window.System &&
+		opts.moduleUrl &&
+		opts.moduleUrl.match(/min\.(.js)?$/)
+	) {
+		return new Promise(resolveOLoadModule({ isProd: true }));
 	} else {
 		// Transpile in-dev code
 		opts.systemjsOpts = Object.assign({}, devOpts, opts.systemjsOpts);
-		$script(
-			"https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.19/system.js",
-			"system"
-		);
+		return new Promise(resolveOLoadModule({ isProd: false }));
 	}
 
-	return new Promise((resolve, reject) => {
-		$script.ready("system", function(System = window.System) {
-			System.config(opts.systemjsOpts);
+	function resolveOLoadModule({ isProd = false }) {
+		return (resolve, reject) => {
+			$script(
+				`https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.19/system${
+					isProd ? "-production" : ""
+				}.js`,
+				function(System = window.System) {
+					System.config(opts.systemjsOpts);
 
-			if (oLoadEl && oLoadEl.parentNode && opts.moduleUrl) {
-				return System.import(opts.moduleUrl)
-					.then(m => {
-						oLoadEl.parentNode.replaceChild(componentRoot, oLoadEl);
-						componentRoot.classList.add("o-loaded");
+					if (oLoadEl && oLoadEl.parentNode && opts.moduleUrl) {
+						return System.import(opts.moduleUrl)
+							.then(m => {
+								oLoadEl.parentNode.replaceChild(componentRoot, oLoadEl);
+								componentRoot.classList.add("o-loaded");
+								resolve({
+									component: m.default(componentRoot, opts.config),
+									config: opts.config,
+									opts: opts
+								});
+							})
+							.catch(e => {
+								reject(e);
+							});
+					} else {
+						// @TODO consider whether to reject instead when no module URL is provided
+						// reject(new Error('No module URL provided'));
 						resolve({
-							component: m.default(componentRoot, opts.config),
+							component: undefined,
 							config: opts.config,
-							opts: opts,
+							opts: opts
 						});
-					})
-					.catch(e => {
-						reject(e);
-					});
-			} else {
-				// @TODO consider whether to reject instead when no module URL is provided
-				// reject(new Error('No module URL provided'));
-				resolve({
-					component: undefined,
-					config: opts.config,
-					opts: opts,
-				});
-			}
-		});
-	});
+					}
+				}
+			);
+		};
+	}
 }
 
 /**
@@ -145,7 +150,7 @@ function createOptsFromDataSet(el) {
 
 		return opts;
 	} catch (e) {
-		if (e.name === 'SyntaxError') console.error('Invalid o-load config object');
+		if (e.name === "SyntaxError") console.error("Invalid o-load config object");
 		return opts;
 	}
 }
