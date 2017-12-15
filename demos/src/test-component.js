@@ -33,9 +33,9 @@ System.config({
 	}
 });
 
-export default el =>
+export default (el, opts) =>
 	System.import(
 		"https://rawgit.com/Financial-Times/o-load/HEAD/demos/src/party-parrot.js"
 	).then(m => {
-		return m.default(el);
+		return m.default(el, opts);
 	});

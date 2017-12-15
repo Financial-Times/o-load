@@ -12,4 +12,12 @@ import preact from "preact";
 const gif =
 	"https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcultofthepartyparrot.com%2Fparrots%2Fhd%2Fdealwithitparrot.gif?source=ig";
 
-export default el => preact.render(<img alt="party parrot" src={gif} />, el);
+export default (el, opts = {}) =>
+	preact.render(
+		<img
+			alt="party parrot"
+			transform={opts.flip ? "transform: scaleX(-1);" : ""}
+			src={gif}
+		/>,
+		el
+	);
