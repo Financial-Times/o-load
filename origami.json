@@ -1,11 +1,11 @@
 {
-	"description": "that bootstraps components",
+	"description": "Origami component that bootstraps non-Origami components",
 	"origamiType": "module",
 	"origamiVersion": 1,
 	"keywords": "loader, systemjs",
 	"origamiCategory": "components",
 	"support": "https://github.com/financial-times/o-load/issues",
-	"supportStatus": "active",
+	"supportStatus": "experimental",
 	"browserFeatures": {
 		"required": ["default-3.6"],
 		"optional": ["default-3.6"]
