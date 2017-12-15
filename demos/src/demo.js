@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Demo instantiation code for o-load
+ */
+
 import "./../../main.js";
 
 function initDemos() {

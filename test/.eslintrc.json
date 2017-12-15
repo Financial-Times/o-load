@@ -1,6 +1,5 @@
 {
 	"env": {
-		"mocha": true,
-		"sinon": true
+		"mocha": true
 	}
 }

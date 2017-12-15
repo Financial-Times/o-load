@@ -3,6 +3,8 @@
  * This demo component bootstraps the component using SystemJS.
  * It's kind of sub-optimal because we're using SystemJS from globals, but
  * this is meant more as a demonstration than anything.
+ *
+ * @TODO Convert this into separate component, maybe g-preact-jsx-component...?
  */
 
 // SystemJS is provided via global from $script.

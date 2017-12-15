@@ -1,3 +1,8 @@
+/**
+ * @file
+ * HTML fixtures for integration tests
+ */
+
 let sandboxEl;
 
 function createSandbox() {
@@ -23,8 +28,17 @@ function insert(html) {
 function htmlCode () {
 	const html = `<div>
 		<h1>Basic Demo</h1>
-			<div class="o-load" data-o-component="o-load" id="element"></div>
+			<img src="" class="o-load" data-o-component="o-load" id="element" />
 	</div>
+
+		<h1>Demo with stringified config</h1>
+			<img
+				src=""
+				class="o-load"
+				data-o-component="o-load"
+				id="element-with-config">
+				data-o-load-config="{&#x22;configIsWorking&#x22;:true}"
+			</div>
 	`;
 	insert(html);
 }

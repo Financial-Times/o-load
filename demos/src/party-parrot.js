@@ -4,7 +4,7 @@
  * It is a trivial proof-of-concept. Preact is loaded via SystemJS.
  */
 
-import preact from "preact"; // eslint-disable-line no-unused-vars
+import preact from "preact";
 
 // Tell Babel to transform JSX into h() calls:
 /** @jsx preact.h */

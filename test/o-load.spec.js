@@ -1,4 +1,5 @@
 /**
+ * @file
  * Spec for o-load
  */
 
@@ -50,12 +51,24 @@ describe("oLoad", () => {
 		it("component array when initialized", () => {
 			const componentItems = component.init();
 			componentItems.should.be.an("array");
-			componentItems[0].should.eventually.be.an.instanceof(component);
+			componentItems[0].should.eventually.have.property('component')
+				.that.is.an.instanceof(component);
 		});
 
 		it("single component when initialized with a root element", () => {
 			const componentItem = component.init("#element");
-			componentItem.should.eventually.be.an.instanceof(component);
+			componentItem.should.eventually.have.property('component')
+				.that.is.an.instanceof(component);
+		});
+
+		it("configures when provided an html entities-escaped JSON object", () => {
+			const componentItem = component.init("#element-with-config");
+			componentItem.should.eventually.have.property('component')
+				.that.is.an.instanceof(component);
+			componentItem.should.eventually.have.property('config')
+				.that.equals({
+					configIsWorking: true,
+				})
 		});
 	});
 });
