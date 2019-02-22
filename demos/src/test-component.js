@@ -35,7 +35,7 @@ System.config({
 
 export default (el, opts) =>
 	System.import(
-		"https://rawgit.com/Financial-Times/o-load/HEAD/demos/src/party-parrot.js"
+		"https://cdn.jsdelivr.net/gh/Financial-Times/o-load@HEAD/demos/src/party-parrot.js"
 	).then(m => {
 		return m.default(el, opts);
 	});
