@@ -19,6 +19,6 @@ import oLoad from "o-load";
 
 ### License
 
-Copyright (c) 117 Financial Times Ltd. All rights reserved.
+Copyright (c) 2019 Financial Times Ltd. All rights reserved.
 
 This software is published under the [MIT licence](http://opensource.org/licenses/MIT).
