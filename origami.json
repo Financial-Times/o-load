@@ -5,7 +5,7 @@
 	"keywords": "loader, systemjs",
 	"origamiCategory": "components",
 	"support": "https://github.com/financial-times/o-load/issues",
-	"supportStatus": "experimental",
+	"supportStatus": "dead",
 	"browserFeatures": {
 		"required": ["default-3.6"],
 		"optional": ["default-3.6"]
